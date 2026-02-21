@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 
-const dbPath = path.resolve(process.cwd(), '..', 'data', 'yardgoats.db');
+const dbPath = path.resolve(process.cwd(), 'data', 'yardgoats.db');
 
 export const db = new Database(dbPath, {
   readonly: true,
