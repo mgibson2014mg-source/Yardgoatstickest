@@ -1,0 +1,87 @@
+{
+  "copyright": "Copyright 2026 MLB Advanced Media, L.P.",
+  "totalItems": 6,
+  "totalEvents": 0,
+  "totalGames": 6,
+  "totalGamesInProgress": 0,
+  "dates": [
+    {
+      "date": "2026-04-10",
+      "games": [
+        {
+          "gamePk": 100001,
+          "gameDate": "2026-04-10T23:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 100, "name": "Portland Sea Dogs" }, "isHome": false },
+            "home": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true }
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "games": [
+        {
+          "gamePk": 100002,
+          "gameDate": "2026-04-11T22:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 100, "name": "Portland Sea Dogs" }, "isHome": false },
+            "home": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true }
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-04-12",
+      "games": [
+        {
+          "gamePk": 100003,
+          "gameDate": "2026-04-12T17:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 100, "name": "Portland Sea Dogs" }, "isHome": false },
+            "home": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true }
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-04-14",
+      "games": [
+        {
+          "gamePk": 100004,
+          "gameDate": "2026-04-14T23:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 103, "name": "New Hampshire Fisher Cats" }, "isHome": false },
+            "home": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true }
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-04-15",
+      "games": [
+        {
+          "gamePk": 100005,
+          "gameDate": "2026-04-15T23:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 103, "name": "New Hampshire Fisher Cats" }, "isHome": false },
+            "home": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true }
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-04-28",
+      "games": [
+        {
+          "gamePk": 100006,
+          "gameDate": "2026-04-28T23:05:00Z",
+          "teams": {
+            "away": { "team": { "id": 560, "name": "Hartford Yard Goats" }, "isHome": true },
+            "home": { "team": { "id": 102, "name": "Somerset Patriots" }, "isHome": false }
+          }
+        }
+      ]
+    }
+  ]
+}
