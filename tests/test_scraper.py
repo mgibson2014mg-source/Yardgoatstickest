@@ -13,6 +13,7 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
