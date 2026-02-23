@@ -1,0 +1,73 @@
+name: Manual Test Alert
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_message:
+        description: 'Message to include in the test alert'
+        required: true
+        default: 'Test Alert: The Yard Goats Tracker is active! 🐐⚾'
+
+jobs:
+  test-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests twilio sendgrid
+
+      - name: Run Manual Test Script
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_NUMBER: ${{ secrets.TWILIO_FROM_NUMBER }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          TEST_MESSAGE: ${{ github.event.inputs.test_message }}
+        run: |
+          # We'll use a one-line python script to trigger a fake alert
+          python -c "
+          import os, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path.cwd()))
+          from admin.db import init_db, get_conn, list_recipients
+          from alerts.sms import send_sms
+          from alerts.email_sender import send_email
+
+          init_db()
+          msg = os.environ.get('TEST_MESSAGE')
+          
+          with get_conn() as conn:
+              recipients = list_recipients(conn, active_only=True)
+              print(f'Sending test alert to {len(recipients)} recipients...')
+              
+              for r in recipients:
+                  name = r['name']
+                  if r['phone']:
+                      print(f'Sending SMS to {name}...')
+                      send_sms(r['phone'], msg)
+                  if r['email']:
+                      print(f'Sending Email to {name}...')
+                      # Simple fake payload for the template
+                      payload = {
+                          'game_date': 'TEST RUN',
+                          'opponent': 'Test Opponent',
+                          'display_date': 'TODAY',
+                          'time': 'NOW',
+                          'promo_summary': 'System Test Active ✅',
+                          'has_promos': False,
+                          'ticket_url': 'https://www.milb.com/hartford/tickets'
+                      }
+                      send_email(r['email'], 'Yard Goats Tracker: Connection Test', payload)
+          "
