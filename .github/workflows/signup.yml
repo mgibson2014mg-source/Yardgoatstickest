@@ -1,0 +1,52 @@
+name: Handle Signup
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Recipient Name'
+        required: true
+      phone:
+        description: 'Recipient Phone (+1...)'
+        required: false
+      email:
+        description: 'Recipient Email'
+        required: false
+
+jobs:
+  add-recipient:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Add Recipient
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Build the command based on inputs
+          CMD="python admin/manage.py add --name "${{ github.event.inputs.name }}""
+          if [ -n "${{ github.event.inputs.phone }}" ]; then
+            CMD="$CMD --phone "${{ github.event.inputs.phone }}""
+          fi
+          if [ -n "${{ github.event.inputs.email }}" ]; then
+            CMD="$CMD --email "${{ github.event.inputs.email }}""
+          fi
+          echo "Running: $CMD"
+          eval $CMD
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/yardgoats.db
+          git commit -m "chore: new signup - ${{ github.event.inputs.name }} [skip ci]" || echo "No changes to commit"
+          git push
