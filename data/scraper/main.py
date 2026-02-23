@@ -58,7 +58,7 @@ def run(season: int = None, dry_run: bool = False) -> bool:
         return False
 
     if not games:
-        logger.warning("No games returned for season %d — check teamId/5388", season)
+        logger.warning("No games returned for season %d — check teamId/538", season)
         return False
 
     # ── Step 3: Upsert games ──────────────────────────────

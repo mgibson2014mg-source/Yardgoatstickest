@@ -3,11 +3,11 @@ scraper/schedule.py — Fetch Hartford Yard Goats home schedule
 via the MLB Stats API (statsapi.mlb.com).
 
 Hartford Yard Goats:
-  teamId  : 5388
+  teamId  : 538
   sportId : 12  (Double-A)
 
 API endpoint:
-  https://statsapi.mlb.com/api/v1/schedule?sportId=12&teamId=5388
+  https://statsapi.mlb.com/api/v1/schedule?sportId=12&teamId=538
     &startDate=YYYY-MM-DD&endDate=YYYY-MM-DD&gameType=R
 """
 
@@ -20,7 +20,7 @@ import requests
 logger = logging.getLogger(__name__)
 
 # ── Constants ─────────────────────────────────────────────
-TEAM_ID   = 5388         # Hartford Yard Goats
+TEAM_ID   = 538          # Hartford Yard Goats
 SPORT_ID  = 12           # Double-A (MiLB)
 BASE_URL  = "https://statsapi.mlb.com/api/v1"
 TICKET_BASE = "https://www.milb.com/hartford/tickets"
